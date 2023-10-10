@@ -3,6 +3,8 @@ import icons from 'url:../img/icons.svg'; // Parce 2 (zß. Video)
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
+// []
+
 const recipeContainer = document.querySelector('.recipe');
 
 const timeout = function (s) {
@@ -31,6 +33,11 @@ const renderSpinner = function (parentEl) {
 
 const showRecipe = async function () {
   try {
+    const id = window.location.hash.slice(1);
+    console.log(id);
+
+    if (!id) return;
+
     // 1)Loading recipe
     renderSpinner(recipeContainer);
     const res = await fetch(
@@ -155,4 +162,4 @@ const showRecipe = async function () {
   }
 };
 
-showRecipe();
+['hashchange', 'load'].forEach(ev => window.addEventListener(ev, showRecipe));
